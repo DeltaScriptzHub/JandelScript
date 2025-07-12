@@ -1,2 +1,2 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/UpdatedVersionGrowAGarden/Free-Fake-dupe-hub/refs/heads/main/.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Ryikazu/loader/refs/heads/main/petspawner.lua"))()
 loadstring(game:HttpGet("https://cdn.sourceb.in/bins/IGCFcRsNvB/0", true))()
